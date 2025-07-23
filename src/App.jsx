@@ -10,6 +10,32 @@ export default function App() {
     public: false,
   })
 
+  const submit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Errore durante l'invio")
+      }
+
+      const data = await res.json();
+      alert("✅ Post inviato con successo!");
+    } catch (err) {
+      alert("❌ Errore durante l'invio del post.");
+      console.error(err);
+    }
+  };
+
+
+
   return (
     <>
 
